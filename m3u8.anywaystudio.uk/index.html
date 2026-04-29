@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>M3U8Go — M3U8 视频下载工具</title>
+  <meta name="description" content="M3U8Go 是一款简洁、高效的 M3U8 视频下载工具，支持多任务并发、AES 解密，并配有 Chrome 扩展一键嗅探下载地址。" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+<header>
+  <div class="container">
+    <div class="hero">
+      <img src="assets/images/logo.png" alt="M3U8Go Logo" class="logo" />
+      <h1>
+        <span class="zh">M3U8 视频，轻松下载</span>
+        <span class="en">Download M3U8 Videos with Ease</span>
+      </h1>
+      <p class="tagline">
+        <span class="zh">桌面客户端 + Chrome 扩展，嗅探链接、并发下载、自动合并，一站搞定。</span>
+        <span class="en">Desktop app &amp; Chrome extension — sniff, download, merge. All in one.</span>
+      </p>
+
+      <!-- Tab switcher -->
+      <div class="tabs" role="tablist">
+        <button class="tab active" role="tab" aria-selected="true" data-tab="app">
+          <span class="zh">桌面客户端</span><span class="en">Desktop App</span>
+        </button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="ext">
+          <span class="zh">Chrome 扩展</span><span class="en">Chrome Extension</span>
+        </button>
+      </div>
+
+      <!-- App download (shown on app tab) -->
+      <div class="hero-cta" id="cta-app">
+        <div class="btn-group btn-group--center">
+          <a href="#" class="btn btn-primary">下载 · Download for macOS</a>
+        </div>
+        <p class="btn-note">
+          <span class="zh">需要 macOS 12+，Windows 支持正在完善</span>
+          <span class="en">Requires macOS 12+. Windows support coming soon.</span>
+        </p>
+      </div>
+
+      <!-- Extension download (shown on ext tab) -->
+      <div class="hero-cta hidden" id="cta-ext">
+        <div class="btn-group btn-group--center">
+          <a href="#" class="btn btn-primary">添加扩展 · Add to Chrome</a>
+        </div>
+        <p class="btn-note">
+          <span class="zh">需配合 M3U8Go 桌面客户端使用</span>
+          <span class="en">Requires M3U8Go desktop app to be installed.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ========== MAIN CONTENT ========== -->
+<main>
+
+  <!-- APP TAB CONTENT -->
+  <div class="tab-panel" id="panel-app">
+    <section class="section">
+      <div class="container">
+        <!-- Screenshot -->
+        <div class="screenshot-wrap">
+          <img src="assets/images/screenshot.png" alt="M3U8Go 运行截图 / Screenshot" />
+        </div>
+
+        <!-- Feature cards -->
+        <div class="features">
+          <div class="feature-card">
+            <div class="icon">⚡️</div>
+            <h3><span class="zh">分片并发下载</span><span class="en">Concurrent Segments</span></h3>
+            <p><span class="zh">多线程并发抓取视频片段，自动重试失败分片。</span><span class="en">Multi-threaded segment fetch with automatic retry.</span></p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">🔐</div>
+            <h3><span class="zh">AES-128 解密</span><span class="en">AES-128 Decryption</span></h3>
+            <p><span class="zh">自动解析播放列表加密信息，透明解密每个片段。</span><span class="en">Parses playlist key info and decrypts each segment transparently.</span></p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">🎬</div>
+            <h3><span class="zh">自动合并 MP4</span><span class="en">Auto Merge to MP4</span></h3>
+            <p><span class="zh">内置 FFmpeg 自动下载与管理，下载完成即合并输出。</span><span class="en">Auto-downloads and manages FFmpeg; merges to MP4 on completion.</span></p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">📋</div>
+            <h3><span class="zh">多任务队列</span><span class="en">Multi-task Queue</span></h3>
+            <p><span class="zh">同时管理多个下载任务，可自定义并发数与重试次数。</span><span class="en">Manage multiple tasks simultaneously with configurable concurrency.</span></p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">🔗</div>
+            <h3><span class="zh">自定义协议唤起</span><span class="en">Custom Protocol</span></h3>
+            <p><span class="zh">支持 <code>m3u8go://</code> 协议，浏览器扩展一键发送下载任务。</span><span class="en">Supports <code>m3u8go://</code> protocol for one-click dispatch from browser.</span></p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">🌐</div>
+            <h3><span class="zh">中英双语界面</span><span class="en">Bilingual UI</span></h3>
+            <p><span class="zh">内置中文与英文切换，适合不同用户习惯。</span><span class="en">Switch between Chinese and English in settings.</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- EXTENSION TAB CONTENT -->
+  <div class="tab-panel hidden" id="panel-ext">
+    <section class="section">
+      <div class="container">
+        <div class="ext-block">
+          <img src="assets/images/extension-icon.png" alt="M3U8Go Download Button Icon" class="ext-icon" />
+          <div class="ext-content">
+            <h3><span class="zh">工作方式</span><span class="en">How It Works</span></h3>
+            <p>
+              <span class="zh">扩展在后台监听网络请求，嗅探到 <code>.m3u8</code> 地址后，弹出下载按钮。点击即可唤起 M3U8Go 客户端并自动填入下载信息（地址、标题、来源页）。支持在扩展设置中选择启用的网站及开启调试浮层。</span>
+              <span class="en">The extension listens to network requests in the background. When an <code>.m3u8</code> URL is detected, a download button appears. One click launches M3U8Go and pre-fills the URL, title, and referrer. Configure supported sites and debug overlay in extension options.</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Extension feature cards -->
+        <div class="features">
+          <div class="feature-card">
+            <div class="icon">👁️</div>
+            <h3><span class="zh">自动嗅探</span><span class="en">Auto Sniff</span></h3>
+            <p><span class="zh">后台实时监听，自动识别页面中的 M3U8 地址。</span><span class="en">Real-time background monitoring for M3U8 URLs.</span></p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">🖱️</div>
+            <h3><span class="zh">一键唤起</span><span class="en">One-click Launch</span></h3>
+            <p><span class="zh">点击按钮即唤起桌面客户端，自动传递所有参数。</span><span class="en">Launches the desktop app and passes all parameters automatically.</span></p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">⚙️</div>
+            <h3><span class="zh">可配置站点</span><span class="en">Configurable Sites</span></h3>
+            <p><span class="zh">在扩展选项页面选择要启用的网站，默认全选。</span><span class="en">Choose which sites to enable in the options page; all enabled by default.</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+      document.getElementById('panel-' + target).classList.remove('hidden');
+      document.getElementById('cta-app').classList.add('hidden');
+      document.getElementById('cta-ext').classList.add('hidden');
+      document.getElementById('cta-' + target).classList.remove('hidden');
+    });
+  });
+</script>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="container">
+    <p>
+      © 2026 M3U8Go &nbsp;·&nbsp;
+      <a href="https://anywaystudio.uk" target="_blank" rel="noopener">anywaystudio.uk</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
